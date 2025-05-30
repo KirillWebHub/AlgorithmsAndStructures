@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №2</title>
+    <link rel="stylesheet" href="../styles/lab0/lab0.css">
+	<link rel="stylesheet" href="../styles/lab1.css">
+	<link rel="stylesheet" href="../styles/IndexStyle/header.css">
+    <!-- Prism.js для подсветки синтаксиса -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+</head>
+<body>
+	<header class="header_site">
+		<!-- Навигационное меню -->
+		<div class="logo">ITMO</div>
+		<nav class="navBar">
+			<ul class="listNavBar">
+				<li class="item1 itemListNavbar">
+					<a href="../Home.html">Главная</a> 
+				</li>
+				<li class="item2 itemListNavbar">
+					<a href="../index.html">Задания</a> 
+				</li>
+				<li class="item3 itemListNavbar">
+					<a href="../WebSite.html">О сайте</a> 
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+    <div class="lab-container">
+        <header class="lab-header">
+            <div class="lab-number">Лабораторная работа №2</div>
+            <h1 class="lab-title" contenteditable="true">
+				Алгоритм пирамидальной сортировки в дек
+			</h1>
+        </header>
+
+		<section class="lab-section">
+            <h2 class="section-title">Задание</h2>
+            <div class="lab-description" contenteditable="true">
+				Разработать программу пирамидальной сортировки на языке Java, 
+				записывая числа из файла и считывая их в дек на базе связанного списка. Оценить сложность
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Краткий обзор</h2>
+            <div class="lab-description" contenteditable="true">
+			Программа реализует алгоритм пирамидальной сортировки (HeapSort) с подробным анализом 
+			всех ключевых операций, выполняемых в процессе сортировки. Цель программы — не только 
+			отсортировать массив чисел, но и провести оценку вычислительной сложности алгоритма на 
+			практике. Для этого производится подсчёт следующих операций: <br>
+			•	сравнений элементов;<br>
+			•	обменов (перестановок);<br>
+			•	арифметических операций (сложение, вычитание, умножение, деление);<br>
+			•	операций чтения и записи;<br>
+			•	присваиваний;<br>
+			•	итераций циклов;<br>
+			•	вызовов вспомогательной функции heapify;<br>
+			•	выделения памяти.<br>
+			Собранная информация позволяет построить эмпирические графики зависимости количества 
+			операций и времени выполнения от размера входных данных, а также подтвердить теоретическую 
+			сложность алгоритма — O(n log n).
+	
+            </div>
+        </section>
+
+		<section class="lab-section">
+            <h2 class="section-title">Оценка сложности алгоритма</h2>
+            <div class="lab-description" contenteditable="true">
+				HeapSort — это алгоритм сортировки, основанный на структуре 
+				данных "двоичная куча". Его ключевое преимущество заключается 
+				в гарантированной временной сложности O(n log n) во всех случаях: 
+				лучшем, среднем и худшем. Это делает его более предсказуемым, чем, 
+				например, QuickSort, который в неудачных случаях может деградировать до O(n²).<br><br>
+
+				<strong>Временная сложность</strong>
+				<br>
+				Построение кучи (heapify) из исходного массива занимает O(n) операций.<br>
+				Хотя кажется, что это должно быть O(n log n), на практике сложность ниже, 
+				потому что большинство поддеревьев имеют небольшую высоту.<br>
+
+				Извлечение элементов из кучи (фаза сортировки) 
+				выполняется за O(n log n), так как каждый из n 
+				элементов извлекается за O(log n) (высота кучи).<br>
+
+				<strong>Итоговая сложность:</strong> O(n) + O(n log n) = O(n log n).<br><br>
+
+				<strong>Пространственная сложность</strong><br>
+				HeapSort является in-place алгоритмом, то есть он не требует дополнительной 
+				памяти (кроме небольшого количества стековых вызовов при рекурсивном heapify). 
+				Это делает его полезным в системах с ограниченными ресурсами.
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Реализация HeapSort.java</h2>
+            <div class="code-container">
+                <pre class="line-numbers"><code class="language-java" id="js-code">import java.util.LinkedList;
+import java.util.List;
+
+public class HeapSort {
+
+	// Метод сортировки, принимающий список и возвращающий отсортированный список
+	public static List<Integer> sort(LinkedList<Integer> input) {
+		HeapSortAnalyzer.logMemoryAlloc(); // Логируем выделение памяти
+		int[] arr = new int[input.size()]; // Создаем массив для сортировки
+		HeapSortAnalyzer.logAssignment(); // Логируем операцию присваивания
+		HeapSortAnalyzer.logMathOp(); // Логируем математическую операцию
+
+		// Копируем элементы из LinkedList в массив для сортировки
+		HeapSortAnalyzer.logLoopInit(); // Логируем инициализацию цикла
+		for (int i = 0; i < input.size(); i++) {
+			HeapSortAnalyzer.logLoopIteration(); // Логируем итерацию цикла
+			arr[i] = input.get(i); // Копируем элемент из списка в массив
+			HeapSortAnalyzer.logGet(); // Логируем получение элемента
+			HeapSortAnalyzer.logSet(); // Логируем установку значения
+			HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+		}
+
+		int n = arr.length; // Сохраняем длину массива
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+
+		// Построение кучи (перегруппируем массив)
+		// Начинаем с последнего нелистового узла (n/2-1)
+		HeapSortAnalyzer.logLoopInit(); // Логируем инициализацию цикла
+		for (int i = n / 2 - 1; i >= 0; i--) {
+			HeapSortAnalyzer.logLoopIteration(); // Логируем итерацию цикла
+			HeapSortAnalyzer.logMathOp(); // Логируем математическую операцию
+			HeapSortAnalyzer.logComparison(); // Логируем сравнение
+			heapify(arr, n, i); // Вызываем heapify для текущего узла
+		}
+
+		// Один за другим извлекаем элементы из кучи
+		HeapSortAnalyzer.logLoopInit(); // Логируем инициализацию цикла
+		for (int i = n - 1; i >= 0; i--) {
+			HeapSortAnalyzer.logLoopIteration(); // Логируем итерацию цикла
+			HeapSortAnalyzer.logMathOp(); // Логируем математическую операцию
+			HeapSortAnalyzer.logComparison(); // Логируем сравнение
+			// Перемещаем текущий корень в конец
+			swap(arr, 0, i);
+			// Вызываем heapify на уменьшенной куче
+			heapify(arr, i, 0);
+		}
+
+		// Преобразуем отсортированный массив обратно в LinkedList
+		HeapSortAnalyzer.logMemoryAlloc(); // Логируем выделение памяти
+		List<Integer> result = new LinkedList<>(); // Создаем список для результата
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+
+		// Копируем элементы из массива в LinkedList
+		HeapSortAnalyzer.logLoopInit(); // Логируем инициализацию цикла
+		for (int num : arr) {
+			HeapSortAnalyzer.logLoopIteration(); // Логируем итерацию цикла
+			result.add(num); // Добавляем элемент в список
+			HeapSortAnalyzer.logSet(); // Логируем установку значения
+		}
+
+		return result; // Возвращаем отсортированный список
+	}
+
+	// Метод heapify - восстанавливает свойства кучи для поддерева с корнем в i
+	private static void heapify(int[] arr, int n, int i) {
+		HeapSortAnalyzer.logHeapifyCall(); // Логируем вызов heapify
+
+		int largest = i; // Инициализируем largest как корень
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+		int l = 2 * i + 1; // Левый потомок = 2*i + 1
+		HeapSortAnalyzer.logMathOp(); // Логируем математическую операцию
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+		int r = 2 * i + 2; // Правый потомок = 2*i + 2
+		HeapSortAnalyzer.logMathOp(); // Логируем математическую операцию
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+
+		// Если левый потомок больше корня
+		HeapSortAnalyzer.logComparison(); // Логируем сравнение
+		if (l < n) { // Проверяем, что левый потомок существует
+			HeapSortAnalyzer.logComparison(); // Логируем сравнение
+			HeapSortAnalyzer.logGet(); // Логируем получение элемента
+			HeapSortAnalyzer.logGet(); // Логируем получение элемента
+			if (arr[l] > arr[largest]) { // Сравниваем значения
+				HeapSortAnalyzer.logComparison(); // Логируем сравнение
+				largest = l; // Обновляем largest
+				HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+			}
+		}
+
+		// Если правый потомок больше, чем самый большой элемент на данный момент
+		HeapSortAnalyzer.logComparison(); // Логируем сравнение
+		if (r < n) { // Проверяем, что правый потомок существует
+			HeapSortAnalyzer.logComparison(); // Логируем сравнение
+			HeapSortAnalyzer.logGet(); // Логируем получение элемента
+			HeapSortAnalyzer.logGet(); // Логируем получение элемента
+			if (arr[r] > arr[largest]) { // Сравниваем значения
+				HeapSortAnalyzer.logComparison(); // Логируем сравнение
+				largest = r; // Обновляем largest
+				HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+			}
+		}
+
+		// Если largest не корень
+		HeapSortAnalyzer.logComparison(); // Логируем сравнение
+		if (largest != i) {
+			swap(arr, i, largest); // Меняем местами корень и largest
+			heapify(arr, n, largest); // Рекурсивно heapify поддерево
+		}
+	}
+
+	// Метод обмена значений в массиве
+	private static void swap(int[] arr, int i, int j) {
+		int temp = arr[i]; // Сохраняем значение arr[i] во временной переменной
+		HeapSortAnalyzer.logGet(); // Логируем получение элемента
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+		arr[i] = arr[j]; // Присваиваем arr[i] значение arr[j]
+		HeapSortAnalyzer.logGet(); // Логируем получение элемента
+		HeapSortAnalyzer.logSet(); // Логируем установку значения
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+		arr[j] = temp; // Присваиваем arr[j] сохраненное значение
+		HeapSortAnalyzer.logSet(); // Логируем установку значения
+		HeapSortAnalyzer.logAssignment(); // Логируем присваивание
+		HeapSortAnalyzer.logSwap(); // Логируем операцию обмена
+	}
+}
+                </code></pre>
+                <button onclick="runCode()">Выполнить</button>
+            </div>
+        </section>
+
+		<section class="lab-section">
+			<h2 class="section-title">Входные данные</h2>
+			<input type="file" id="input-file" accept=".txt">
+			<button id="run" class="sortButton">Запустить сортировку</button>
+		  </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Консоль вывода</h2>
+            <div class="code-container" style="background-color: #111827;">
+                <pre id="output-console" style="color: #10b981; font-family: monospace;">[Результат выполнения появится здесь]</pre>
+            </div>
+        </section>
+
+        <footer class="footer-meta">
+            <span class="deadline">Выполнил Митичкин К.А</span>
+            <span class="status">Статус: Сдано</span>
+        </footer>
+    </div>
+</body>
+	<script src="../scripts/lab2/server2.js"></script>
+</html>

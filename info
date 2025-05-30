@@ -1,0 +1,15 @@
+"Компиляция файлов: Сервер, Сервисы, Алгоритмы"
+javac -d out backend/AlgoServer.java 
+javac -d out backend/Handler/HeapSortHandler.java
+javac -d out backend/Handler/dto/SortRequest.java 
+javac -d out backend/Handler/dto/SortResponse.java 
+javac -d out backend/service/HeapSortService.java 
+javac -d out backend/algorithms/HeapSort.java
+javac -d out backend/algorithms/BoyerMoore.java
+javac -d out backend/structures/RedBlackTreeNode.java
+
+
+java -cp out backend.algorithms.BoyerMoore  <-- "Запуск схемы поиска Бойера - Мура"
+java -cp out backend.algorithms.KnuthMorrisPratt <-- "Запуск Поиск по схеме Кнута–Морриса–Пратта"
+java -cp out backend.structures.RedBlackTree <-- "Запуск RedBlackTree"
+java -cp out backend.AlgoServer <-- "Запуск Сервера"

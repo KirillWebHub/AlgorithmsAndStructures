@@ -1,0 +1,139 @@
+Date : 2025-05-10 20:35:02
+Directory : c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork
+Total : 72 files,  2170 codes, 105 comments, 271 blanks, all 2546 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| HTML       |          9 |        839 |         26 |         97 |        962 |
+| CSS        |          7 |        701 |         27 |        106 |        834 |
+| JavaScript |          5 |        462 |         40 |         63 |        565 |
+| Java       |         45 |        155 |         12 |          4 |        171 |
+| XML        |          6 |         13 |          0 |          1 |         14 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                              | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                 |         72 |      2,170 |        105 |        271 |      2,546 |
+| backend                                                                                                                           |         33 |       -145 |         12 |          4 |       -129 |
+| backend (Files)                                                                                                                   |          1 |         25 |          1 |          8 |         34 |
+| backend\Handler                                                                                                                   |          6 |        170 |         13 |         39 |        222 |
+| backend\Handler (Files)                                                                                                           |          3 |        151 |         11 |         32 |        194 |
+| backend\Handler\dto                                                                                                               |          3 |         19 |          2 |          7 |         28 |
+| backend\Java                                                                                                                      |         20 |       -591 |        -45 |        -93 |       -729 |
+| backend\Java\lab1                                                                                                                 |          7 |       -205 |        -38 |        -34 |       -277 |
+| backend\Java\lab1 (Files)                                                                                                         |          5 |       -180 |        -32 |        -29 |       -241 |
+| backend\Java\lab1\models                                                                                                          |          2 |        -25 |         -6 |         -5 |        -36 |
+| backend\Java\lab2                                                                                                                 |          9 |       -309 |         -3 |        -48 |       -360 |
+| backend\Java\lab2 (Files)                                                                                                         |          7 |       -294 |         -3 |        -44 |       -341 |
+| backend\Java\lab2\models                                                                                                          |          2 |        -15 |          0 |         -4 |        -19 |
+| backend\Java\server                                                                                                               |          4 |        -77 |         -4 |        -11 |        -92 |
+| backend\algorithms                                                                                                                |          3 |        189 |         25 |         35 |        249 |
+| backend\service                                                                                                                   |          2 |         33 |          9 |         10 |         52 |
+| backend\utils                                                                                                                     |          1 |         29 |          9 |          5 |         43 |
+| frontend                                                                                                                          |         27 |      2,015 |         93 |        267 |      2,375 |
+| frontend (Files)                                                                                                                  |          3 |        207 |         15 |         14 |        236 |
+| frontend\html                                                                                                                     |          6 |        632 |         11 |         83 |        726 |
+| frontend\scripts                                                                                                                  |          5 |        462 |         40 |         63 |        565 |
+| frontend\scripts\home                                                                                                             |          1 |        223 |         19 |         31 |        273 |
+| frontend\scripts\lab0                                                                                                             |          1 |         13 |          0 |          0 |         13 |
+| frontend\scripts\lab1                                                                                                             |          1 |         78 |          8 |          8 |         94 |
+| frontend\scripts\lab2                                                                                                             |          1 |         67 |          9 |          9 |         85 |
+| frontend\scripts\lab3                                                                                                             |          1 |         81 |          4 |         15 |        100 |
+| frontend\styles                                                                                                                   |          7 |        701 |         27 |        106 |        834 |
+| frontend\styles (Files)                                                                                                           |          4 |        367 |         13 |         52 |        432 |
+| frontend\styles\IndexStyle                                                                                                        |          2 |        203 |         14 |         33 |        250 |
+| frontend\styles\lab0                                                                                                              |          1 |        131 |          0 |         21 |        152 |
+| frontend\svg                                                                                                                      |          6 |         13 |          0 |          1 |         14 |
+| out                                                                                                                               |         12 |        300 |          0 |          0 |        300 |
+| out\backend                                                                                                                       |         12 |        300 |          0 |          0 |        300 |
+| out\backend (Files)                                                                                                               |          1 |         25 |          0 |          0 |         25 |
+| out\backend\Handler                                                                                                               |          5 |        148 |          0 |          0 |        148 |
+| out\backend\Handler (Files)                                                                                                       |          3 |        138 |          0 |          0 |        138 |
+| out\backend\Handler\dto                                                                                                           |          2 |         10 |          0 |          0 |         10 |
+| out\backend\algorithms                                                                                                            |          3 |         81 |          0 |          0 |         81 |
+| out\backend\service                                                                                                               |          2 |         21 |          0 |          0 |         21 |
+| out\backend\utils                                                                                                                 |          1 |         25 |          0 |          0 |         25 |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                          | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\AlgoServer.java                                    | Java       |         25 |          1 |          8 |         34 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Handler\BoyerMooreHandler.java                     | Java       |         51 |          5 |         11 |         67 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Handler\HeapSortHandler.java                       | Java       |         58 |          5 |         12 |         75 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Handler\StaticFileHandlear.java                    | Java       |         42 |          1 |          9 |         52 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Handler\dto\BoyerMooreRequest.java                 | Java       |          5 |          0 |          2 |          7 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Handler\dto\SortRequest.java                       | Java       |          6 |          2 |          3 |         11 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Handler\dto\SortResponse.java                      | Java       |          8 |          0 |          2 |         10 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab1\HeapSort.class                           | Java       |        -18 |          0 |          0 |        -18 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab1\HeapSort.java                            | Java       |        -36 |        -24 |         -9 |        -69 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab1\Lab1Handler$SortResponse.class           | Java       |         -7 |          0 |         -1 |         -8 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab1\Lab1Handler.class                        | Java       |        -44 |          0 |          0 |        -44 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab1\Lab1Handler.java                         | Java       |        -75 |         -8 |        -19 |       -102 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab1\models\SortRequest.class                 | Java       |        -12 |          0 |          0 |        -12 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab1\models\SortRequest.java                  | Java       |        -13 |         -6 |         -5 |        -24 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\HeapSort.class                           | Java       |        -30 |          0 |          0 |        -30 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\HeapSort.java                            | Java       |        -51 |         -3 |        -14 |        -68 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\HeapSortAnalyzer$AnalysisResult.class    | Java       |         -7 |          0 |          0 |         -7 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\HeapSortAnalyzer.class                   | Java       |        -28 |          0 |          0 |        -28 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\HeapSortAnalyzer.java                    | Java       |        -54 |          0 |        -12 |        -66 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\Lab2Handler.class                        | Java       |        -45 |          0 |          0 |        -45 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\Lab2Handler.java                         | Java       |        -79 |          0 |        -18 |        -97 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\models\AnalyzeRequest.class              | Java       |         -7 |          0 |          0 |         -7 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\lab2\models\AnalyzeRequest.java               | Java       |         -8 |          0 |         -4 |        -12 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\server\MainServer.class                       | Java       |        -19 |          0 |          0 |        -19 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\server\MainServer.java                        | Java       |        -20 |         -4 |         -6 |        -30 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\server\Router.class                           | Java       |        -24 |          0 |          0 |        -24 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\Java\server\Router.java                            | Java       |        -14 |          0 |         -5 |        -19 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\algorithms\BoyerMoore.class                        | Java       |         37 |          0 |          0 |         37 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\algorithms\BoyerMoore.java                         | Java       |         74 |          0 |         17 |         91 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\algorithms\HeapSort.java                           | Java       |         78 |         25 |         18 |        121 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\service\BoyerMooreService.java                     | Java       |          7 |          0 |          2 |          9 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\service\HeapSortService.java                       | Java       |         26 |          9 |          8 |         43 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\backend\utils\JsonUtils.java                               | Java       |         29 |          9 |          5 |         43 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\Home.html                                         | HTML       |         22 |          2 |          1 |         25 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\WebSite.html                                      | HTML       |         81 |          5 |          7 |         93 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\html\lab0.html                                    | HTML       |        143 |          2 |         19 |        164 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\html\lab1.html                                    | HTML       |        163 |          4 |         23 |        190 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\html\lab2.html                                    | HTML       |        226 |          2 |         28 |        256 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\html\lab3.html                                    | HTML       |        100 |          3 |         11 |        114 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\html\lab4.html                                    | HTML       |          0 |          0 |          1 |          1 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\html\lab5.html                                    | HTML       |          0 |          0 |          1 |          1 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\index.html                                        | HTML       |        104 |          8 |          6 |        118 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\scripts\home\animatedAlgoritm.js                  | JavaScript |        223 |         19 |         31 |        273 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\scripts\lab0\codeReviu.js                         | JavaScript |         13 |          0 |          0 |         13 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\scripts\lab1\server1.js                           | JavaScript |         78 |          8 |          8 |         94 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\scripts\lab2\server2.js                           | JavaScript |         67 |          9 |          9 |         85 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\scripts\lab3\server3.js                           | JavaScript |         81 |          4 |         15 |        100 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\styles\IndexStyle\header.css                      | CSS        |         98 |          7 |         18 |        123 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\styles\IndexStyle\main.css                        | CSS        |        105 |          7 |         15 |        127 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\styles\home.css                                   | CSS        |        110 |          4 |         15 |        129 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\styles\lab0\lab0.css                              | CSS        |        131 |          0 |         21 |        152 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\styles\lab1.css                                   | CSS        |         34 |          0 |          3 |         37 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\styles\root.css                                   | CSS        |         65 |          3 |          9 |         77 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\styles\webSite.css                                | CSS        |        158 |          6 |         25 |        189 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\svg\check-svgrepo-com.svg                         | XML        |          2 |          0 |          0 |          2 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\svg\free-icon-font-calculator-simple-10489562.svg | XML        |          2 |          0 |          1 |          3 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\svg\free-icon-font-graduation-cap-3914115.svg     | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\svg\heart-svgrepo-com.svg                         | XML        |          2 |          0 |          0 |          2 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\svg\home-svgrepo-com.svg                          | XML        |          2 |          0 |          0 |          2 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\frontend\svg\struct-16-svgrepo-com.svg                     | XML        |          4 |          0 |          0 |          4 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\AlgoServer.class                               | Java       |         25 |          0 |          0 |         25 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\Handler\BoyerMooreHandler.class                | Java       |         48 |          0 |          0 |         48 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\Handler\HeapSortHandler.class                  | Java       |         55 |          0 |          0 |         55 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\Handler\StaticFileHandlear.class               | Java       |         35 |          0 |          0 |         35 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\Handler\dto\SortRequest.class                  | Java       |          5 |          0 |          0 |          5 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\Handler\dto\SortResponse.class                 | Java       |          5 |          0 |          0 |          5 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\algorithms\BoyerMoore.class                    | Java       |         37 |          0 |          0 |         37 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\algorithms\HeapSort$SortResult.class           | Java       |          9 |          0 |          0 |          9 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\algorithms\HeapSort.class                      | Java       |         35 |          0 |          0 |         35 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\service\BoyerMooreService.class                | Java       |          6 |          0 |          0 |          6 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\service\HeapSortService.class                  | Java       |         15 |          0 |          0 |         15 |
+| c:\Users\mitic\OneDrive\Desktop\Works\AlgoritmAndStructure\ProjectWork\out\backend\utils\JsonUtils.class                          | Java       |         25 |          0 |          0 |         25 |
+| Total                                                                                                                             |            |      2,170 |        105 |        271 |      2,546 |
++-----------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

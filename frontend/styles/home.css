@@ -1,0 +1,128 @@
+
+:root {
+	--primary: #1a1a2e;
+	--secondary: #16213e;
+	--accent: #fbb034;
+	--text: #ffffff;
+	--text-secondary: #b8b8d0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Montserrat', sans-serif;
+	background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+	color: var(--text);
+	line-height: 1.6;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+/* Герой-секция */
+.hero {
+	position: relative;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 0 20px;
+	overflow: hidden;
+}
+
+.hero-title {
+	font-size: 4rem;
+	color: var(--accent);
+	margin-bottom: 20px;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	position: relative;
+	z-index: 10;
+	text-shadow: 0 0 20px rgba(251, 176, 52, 0.5);
+	opacity: 0;
+}
+
+.hero-subtitle {
+	font-size: 1.5rem;
+	color: var(--text-secondary);
+	max-width: 800px;
+	margin: 0 auto 40px;
+	position: relative;
+	z-index: 10;
+	opacity: 0;
+}
+
+/* Анимированные элементы */
+.algorithm-circle {
+	position: absolute;
+	border-radius: 50%;
+	border: 2px solid rgba(251, 176, 52, 0.3);
+	pointer-events: none;
+}
+
+.algorithm-node {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background: var(--accent);
+	border-radius: 50%;
+	pointer-events: none;
+	box-shadow: 0 0 15px var(--accent);
+}
+
+.algorithm-line {
+	position: absolute;
+	height: 2px;
+	background: linear-gradient(to right, transparent, var(--accent), transparent);
+	transform-origin: left center;
+	pointer-events: none;
+}
+
+.algorithm-code {
+	position: absolute;
+	font-family: 'Courier New', monospace;
+	color: rgba(251, 176, 52, 0.7);
+	font-size: 14px;
+	white-space: nowrap;
+	pointer-events: none;
+}
+
+/* Кнопка */
+.hero-button {
+	padding: 15px 40px;
+	background: linear-gradient(to right, var(--accent), #ffdd59);
+	color: #1a1a2e;
+	text-decoration: none;
+	border-radius: 50px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	position: relative;
+	z-index: 10;
+	opacity: 0;
+	transform: translateY(20px);
+	transition: all 0.3s ease;
+	border: none;
+	cursor: pointer;
+	font-size: 1rem;
+	box-shadow: 0 5px 25px rgba(251, 176, 52, 0.4);
+}
+
+.hero-button:hover {
+	transform: translateY(-3px) translateY(20px);
+	box-shadow: 0 8px 30px rgba(251, 176, 52, 0.6);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.hero-title {
+		font-size: 2.5rem;
+		letter-spacing: 3px;
+	}
+	
+	.hero-subtitle {
+		font-size: 1.2rem;
+	}
+}
+

@@ -1,0 +1,77 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	height: auto;
+	width: 100%;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0c29 100%);
+    min-height: 100vh;
+    overflow: hidden;
+    perspective: 1000px;
+    color: #fff;
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    animation: twinkle var(--duration) infinite ease-in-out;
+    transform: translateZ(calc(var(--z) * 100px));
+}
+
+/* Основные звёзды (белые) */
+.star:nth-child(1n) {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Золотые звёзды (10% от общего количества) */
+.star:nth-child(10n) {
+    background: #fbb034;
+    box-shadow: 0 0 15px 2px rgba(251, 176, 52, 0.7);
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Эффект глубины */
+.galaxy {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200vw;
+    height: 200vh;
+    background: radial-gradient(circle at center, 
+        rgba(75, 50, 120, 0.3) 0%, 
+        transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    animation: rotate 120s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+[data-transition-content] {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: none;
+}

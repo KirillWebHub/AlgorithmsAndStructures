@@ -1,0 +1,189 @@
+:root {
+	--primary: #1a1a2e;
+	--secondary: #16213e;
+	--accent: #fbb034;
+	--text: #ffffff;
+	--text-secondary: #b8b8d0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Montserrat', sans-serif;
+	background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+	color: var(--text);
+	line-height: 1.6;
+	min-height: 100vh;
+}
+
+/* Стили навигации (сохраняем ваши текущие) */
+.navBar {
+	display: flex;
+}
+
+.listNavBar {
+	display: flex;
+	list-style: none;
+	gap: 40px;
+}
+
+.itemListNavbar {
+	position: relative;
+}
+
+.itemListNavbar a {
+	color: #fff;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	padding: 10px 0;
+	position: relative;
+	transition: all 0.3s ease;
+}
+
+.itemListNavbar a::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(to right, var(--accent), #ffdd59);
+	transition: width 0.3s ease;
+}
+
+.itemListNavbar a:hover::before {
+	width: 100%;
+}
+
+/* Основной контент страницы */
+.about-container {
+	max-width: 1000px;
+	margin: 50px auto;
+	padding: 0 20px;
+}
+
+.page-header {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	color: var(--accent);
+	margin-bottom: 20px;
+}
+
+.page-subtitle {
+	color: var(--text-secondary);
+	font-size: 1.2rem;
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+/* Карточка автора */
+.author-card {
+	display: flex;
+	background: rgba(30, 30, 45, 0.7);
+	backdrop-filter: blur(10px);
+	border-radius: 15px;
+	padding: 30px;
+	margin-bottom: 40px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	border: 1px solid rgba(251, 176, 52, 0.1);
+	align-items: center;
+}
+
+.author-photo {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid var(--accent);
+	margin-right: 30px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.author-info {
+	flex: 1;
+}
+
+.author-name {
+	font-size: 1.8rem;
+	margin: 0 0 10px 0;
+	color: var(--accent);
+}
+
+.author-title {
+	color: var(--text-secondary);
+	margin: 0 0 20px 0;
+	font-size: 1.1rem;
+}
+
+/* Блоки информации */
+.info-section {
+	background: rgba(30, 30, 45, 0.7);
+	backdrop-filter: blur(10px);
+	border-radius: 15px;
+	padding: 30px;
+	margin-bottom: 30px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	border-left: 4px solid var(--accent);
+}
+
+.section-title {
+	font-size: 1.5rem;
+	color: var(--accent);
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.section-text {
+	color: var(--text-secondary);
+	font-size: 1.1rem;
+	line-height: 1.8;
+}
+
+/* Блок пожеланий */
+.wishes-box {
+	background: linear-gradient(135deg, rgba(251, 176, 52, 0.1) 0%, transparent 100%);
+	border: 1px solid rgba(251, 176, 52, 0.2);
+	border-radius: 15px;
+	padding: 30px;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.wishes-text {
+	font-style: italic;
+	font-size: 1.2rem;
+	color: var(--text);
+	line-height: 1.8;
+}
+
+.signature {
+	margin-top: 20px;
+	color: var(--accent);
+	font-weight: 600;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+	.author-card {
+		flex-direction: column;
+		text-align: center;
+	}
+	
+	.author-photo {
+		margin-right: 0;
+		margin-bottom: 20px;
+		width: 150px;
+		height: 150px;
+	}
+	
+	.page-title {
+		font-size: 2rem;
+	}
+}

@@ -1,0 +1,37 @@
+.flash-error {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #ffebee;
+	color: #d32f2f;
+	padding: 12px 24px;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+	z-index: 1000;
+	animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+}
+
+.flash-success {
+	position: fixed;
+	top: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #edffebf6;
+	color: #66d32f;
+	padding: 12px 24px;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+	z-index: 1000;
+	animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; top: 0; }
+	to { opacity: 1; top: 20px; }
+}
+
+@keyframes fadeOut {
+	from { opacity: 1; top: 20px; }
+	to { opacity: 0; top: 0; }
+}

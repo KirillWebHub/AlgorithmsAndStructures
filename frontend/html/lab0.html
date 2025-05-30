@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Лабораторная работа №0</title>
+	<link rel="stylesheet" href="../styles/lab0/lab0.css">
+	<link rel="stylesheet" href="../styles/IndexStyle/header.css">
+	<!-- Prism.js: Стили и скрипты -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+</head>
+<body>
+	<header class="header_site">
+		<!-- Навигационное меню -->
+		<div class="logo">ITMO</div>
+		<nav class="navBar">
+			<ul class="listNavBar">
+				<li class="item1 itemListNavbar">
+					<a href="../Home.html">Главная</a> 
+				</li>
+ 				<li class="item2 itemListNavbar">
+          <a href="../index.html">Задания</a> 
+        </li>
+        <li class="item3 itemListNavbar">
+          <a href="../WebSite.html">О сайте</a> 
+        </li>
+			</ul>
+		</nav>
+	</header>
+    <div class="lab-container">
+        <header class="lab-header">
+            <div class="lab-number">Лабораторная работа №0</div>
+            <h1 class="lab-title" contenteditable="true">Алгоритм решения кубического уравнения</h1>
+        </header>
+
+        <section class="lab-section">
+            <h2 class="section-title">Краткий обзор</h2>
+            <div class="lab-description" contenteditable="true">
+                На языке JavaScript с использованием метода хорд и касательных 
+				для получения корней уравнения. Были рассмотрены все частные случаи: 
+				уравнение линейной и квадратной степени, наличие комплексных и кратных 
+				корней. Также предусмотрена интеграция с HTML-формой для получения 
+				входных данных от пользователя и вывода результата на веб-странице. 
+				Для поиска всех действительных корней использован комбинированный метод 
+				хорд и касательных на отрезках с проверкой смены знака функции. Метод 
+				применяется многократно, для каждого возможного отрезка, в котором происходит 
+				смена знака, и тем самым удаётся найти до трёх корней кубического уравнения.
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Реализация (JavaScript)</h2>
+            <div class="code-container">
+                <pre class="line-numbers"><code class="language-javascript" id="js-code"> // Алгоритм решения: a*x^3 + b*x^2 + c*x + d = 0
+function solveEquation() {
+  const a = Number(prompt("Введите коэфициент a: "));
+  const b = Number(prompt("Введите коэфициент b: "));
+  const c = Number(prompt("Введите коэфициент c: "));
+  const d = Number(prompt("Введите коэфициент d: "));
+
+  solveCubic(a, b, c, d);
+}
+
+function solveCubic(a, b, c, d) {
+  const epsilon = 1e-6;
+  const maxIterations = 100;
+  const step = 0.5;
+  const xMin = -100;
+  const xMax = 100;
+  let roots = [];
+
+  function f(x) {
+    return a * x ** 3 + b * x ** 2 + c * x + d;
+  }
+
+  function df(x) {
+    return 3 * a * x ** 2 + 2 * b * x + c;
+  }
+
+  function findRoot(x1, x2) {
+    let iter = 0;
+    let xLeft = x1;
+    let xRight = x2;
+
+    // Метод хорд
+    while (Math.abs(xRight - xLeft) > epsilon && iter < maxIterations) {
+      let fLeft = f(xLeft);
+      let fRight = f(xRight);
+      if (fRight === fLeft) break;
+
+      let xNew = xRight - fRight * (xRight - xLeft) / (fRight - fLeft);
+      if (f(xNew) * fLeft < 0) {
+        xRight = xNew;
+      } else {
+        xLeft = xNew;
+      }
+      iter++;
+    }
+
+    let x0 = (xLeft + xRight) / 2;
+
+    // Метод Ньютона
+    iter = 0;
+    while (Math.abs(f(x0)) > epsilon && iter < maxIterations) {
+      let dfx = df(x0);
+      if (Math.abs(dfx) < epsilon) break;
+      x0 = x0 - f(x0) / dfx;
+      iter++;
+    }
+
+    return Math.abs(f(x0)) <= epsilon ? x0 : null;
+  }
+
+  for (let x = xMin; x < xMax; x += step) {
+    const x1 = x;
+    const x2 = x + step;
+    if (f(x1) * f(x2) <= 0) {
+      const root = findRoot(x1, x2);
+      if (root !== null) {
+        const isDuplicate = roots.some(r => Math.abs(r - root) < epsilon);
+        if (!isDuplicate) {
+          roots.push(root);
+        }
+      }
+    }
+  }
+
+  if (roots.length === 0) {
+    console.log("Действительных корней не найдено.");
+  } else {
+    const formattedRoots = roots.map((r, i) => `x${i + 1} = ${r.toFixed(6)}`).join(", ");
+    console.log(`Найдено корней: ${roots.length}. ${formattedRoots}`);
+  }
+}
+
+// Вызовим функцию, чтобы всё выполнилось
+solveEquation();
+
+                </code></pre>
+                <button onclick="runCode()">Выполнить</button>
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Консоль вывода</h2>
+            <div class="code-container" style="background-color: #111827;">
+                <pre id="output-console" style="color: #10b981; font-family: monospace;">[Результат выполнения появится здесь]</pre>
+            </div>
+        </section>
+
+        <footer class="footer-meta">
+            <span class="deadline">Выполнил Митичкин К.А</span>
+            <span class="status">Статус: Сдано</span>
+        </footer>
+    </div>
+</body>
+<script src="../scripts/lab0/codeReviu.js"></script>
+</html>

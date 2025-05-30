@@ -1,0 +1,122 @@
+.header_site {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, #fbb034, #ffdd59);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(251, 176, 52, 0.3);
+}
+
+/* Стили навигационного меню */
+.navBar {
+    display: flex;
+}
+
+.listNavBar {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.itemListNavbar {
+    position: relative;
+}
+
+.itemListNavbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Эффекты при наведении */
+.itemListNavbar a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, #fbb034, #ffdd59);
+    transition: width 0.3s ease;
+}
+
+.itemListNavbar a:hover::before {
+    width: 100%;
+}
+
+.itemListNavbar a:hover {
+    color: #fbb034;
+    text-shadow: 0 0 10px rgba(251, 176, 52, 0.5);
+}
+
+/* Анимация для активного элемента */
+.itemListNavbar.active a {
+    color: #fbb034;
+}
+
+.itemListNavbar.active a::before {
+    width: 100%;
+}
+
+/* Дополнительные VIP элементы */
+.header_site::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(251, 176, 52, 0.5), transparent);
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.item1 { animation: fadeIn 0.5s ease forwards; }
+.item2 { animation: fadeIn 0.7s ease forwards; }
+.item3 { animation: fadeIn 0.9s ease forwards; }
+
+/* Эффект блеска при наведении */
+.itemListNavbar:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .header_site {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .logo {
+        margin-bottom: 15px;
+    }
+    
+    .listNavBar {
+        gap: 20px;
+    }
+}

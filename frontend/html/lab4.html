@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №4</title>
+    <link rel="stylesheet" href="../styles/lab0/lab0.css">
+    <link rel="stylesheet" href="../styles/IndexStyle/header.css">
+    <!-- Prism.js для подсветки синтаксиса -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+</head>
+<body>
+    <header class="header_site">
+        <div class="logo">ITMO</div>
+        <nav class="navBar">
+            <ul class="listNavBar">
+                <li class="item1 itemListNavbar"><a href="../Home.html">Главная</a></li>
+                <li class="item2 itemListNavbar"><a href="../index.html">Задания</a></li>
+                <li class="item3 itemListNavbar"><a href="../WebSite.html">О сайте</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="lab-container">
+        <header class="lab-header">
+            <div class="lab-number">Лабораторная работа №4</div>
+            <h1 class="lab-title" contenteditable="true">Поиск по схеме Кнута-Морриса-Пратта и красно-черное дерево</h1>
+        </header>
+
+        <section class="lab-section">
+            <h2 class="section-title">Задание</h2>
+            <div class="lab-description" contenteditable="true">
+                Реализовать алгоритм поиска подстроки по схеме Кнута-Морриса-Пратта на языке Java, затем записать все найденные вхождения в красно-черное дерево.
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Краткий обзор</h2>
+            <div class="lab-description" contenteditable="true">
+                Программа включает реализацию алгоритма Кнута-Морриса-Пратта для эффективного поиска подстроки в строке за O(n + m), а также структуру данных "красно-черное дерево" для хранения позиций вхождений с операциями вставки и поиска за O(log n).
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Реализация KnuthMorrisPratt.java</h2>
+            <div class="code-container">
+                <pre class="line-numbers"><code class="language-java">// Реализация алгоритма Кнута-Морриса-Пратта
+package backend.algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class KnuthMorrisPratt {
+
+	/**
+		* Строит π-функцию (префикс-функцию) для шаблона p
+		* 
+		* @return массив длины m, где pi[i] = длина наибольшего собственного
+		*         префикса-суффикса для p[0..i]
+		*/
+	public int[] buildPrefixFunction(char[] p) {
+		int m = p.length;
+		int[] pi = new int[m];
+		pi[0] = 0;
+		int k = 0;
+		for (int i = 1; i < m; i++) {
+			while (k > 0 && p[k] != p[i]) {
+				k = pi[k - 1];
+			}
+			if (p[k] == p[i]) {
+				k++;
+			}
+			pi[i] = k;
+		}
+		return pi;
+	}
+
+	/**
+		* Ищет все вхождения pattern в text.
+		* 
+		* @return список стартовых индексов вхождений
+		*/
+	public List<Integer> search(char[] text, char[] pattern) {
+		List<Integer> result = new ArrayList<>();
+		int n = text.length, m = pattern.length;
+		if (m == 0 || n < m)
+			return result;
+
+		int[] pi = buildPrefixFunction(pattern);
+		int q = 0; // число символов, совпавших до текущего i
+		for (int i = 0; i < n; i++) {
+			while (q > 0 && pattern[q] != text[i]) {
+				q = pi[q - 1];
+			}
+			if (pattern[q] == text[i]) {
+				q++;
+			}
+			if (q == m) {
+				// найдено вхождение, его конец — i, начало — i-m+1
+				result.add(i - m + 1);
+				q = pi[q - 1]; // готовимся искать дальше
+			}
+		}
+		return result;
+	}
+
+	// Для первого тестирования добавим метод main.
+
+	public static void main(String[] args) {
+		String txt = "ababcabcabababd";
+		String pat = "ababd";
+		KnuthMorrisPratt kmp = new KnuthMorrisPratt();
+		System.out.println("TXT = " + txt);
+		System.out.println("PAT = " + pat);
+		System.out.println("Matches at: " + kmp.search(txt.toCharArray(), pat.toCharArray()));
+	}
+}
+				</code></pre>
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Реализация RedBlackTree.java</h2>
+            <div class="code-container">
+                <pre class="line-numbers"><code class="language-java">// Реализация красно-черного дерева для хранения позиций вхождений
+package backend.structures;
+
+public class RedBlackTree {
+	private RedBlackTreeNode root;
+
+	public void insert(int key) {
+		RedBlackTreeNode inserted = bstInsertReturnInserted(key);
+		fixViolation(inserted);
+	}
+
+	private RedBlackTreeNode bstInsertReturnInserted(int key) {
+		RedBlackTreeNode node = new RedBlackTreeNode(key);
+		RedBlackTreeNode current = root;
+		RedBlackTreeNode parent = null;
+
+		while (current != null) {
+			parent = current;
+			if (key < current.key) {
+				current = current.left;
+			} else {
+				current = current.right;
+			}
+		}
+
+		node.parent = parent;
+
+		if (parent == null) {
+			root = node;
+		} else if (key < parent.key) {
+			parent.left = node;
+		} else {
+			parent.right = node;
+		}
+
+		return node;
+	}
+
+	private void fixViolation(RedBlackTreeNode z) {
+		while (z != root && z.parent.color == RedBlackTreeNode.RED) {
+			if (z.parent == z.parent.parent.left) {
+				RedBlackTreeNode y = z.parent.parent.right;
+				if (y != null && y.color == RedBlackTreeNode.RED) {
+					z.parent.color = RedBlackTreeNode.BLACK;
+					y.color = RedBlackTreeNode.BLACK;
+					z.parent.parent.color = RedBlackTreeNode.RED;
+					z = z.parent.parent;
+				} else {
+					if (z == z.parent.right) {
+						z = z.parent;
+						leftRotate(z);
+					}
+					z.parent.color = RedBlackTreeNode.BLACK;
+					z.parent.parent.color = RedBlackTreeNode.RED;
+					rightRotate(z.parent.parent);
+				}
+			} else {
+				RedBlackTreeNode y = z.parent.parent.left;
+				if (y != null && y.color == RedBlackTreeNode.RED) {
+					z.parent.color = RedBlackTreeNode.BLACK;
+					y.color = RedBlackTreeNode.BLACK;
+					z.parent.parent.color = RedBlackTreeNode.RED;
+					z = z.parent.parent;
+				} else {
+					if (z == z.parent.left) {
+						z = z.parent;
+						rightRotate(z);
+					}
+					z.parent.color = RedBlackTreeNode.BLACK;
+					z.parent.parent.color = RedBlackTreeNode.RED;
+					leftRotate(z.parent.parent);
+				}
+			}
+		}
+		root.color = RedBlackTreeNode.BLACK;
+	}
+
+	private void leftRotate(RedBlackTreeNode x) {
+		RedBlackTreeNode y = x.right;
+		x.right = y.left;
+		if (y.left != null)
+			y.left.parent = x;
+		y.parent = x.parent;
+		if (x.parent == null)
+			root = y;
+		else if (x == x.parent.left)
+			x.parent.left = y;
+		else
+			x.parent.right = y;
+		y.left = x;
+		x.parent = y;
+	}
+
+	private void rightRotate(RedBlackTreeNode y) {
+		RedBlackTreeNode x = y.left;
+		y.left = x.right;
+		if (x.right != null)
+			x.right.parent = y;
+		x.parent = y.parent;
+		if (y.parent == null)
+			root = x;
+		else if (y == y.parent.left)
+			y.parent.left = x;
+		else
+			y.parent.right = x;
+		x.right = y;
+		y.parent = x;
+	}
+
+	public String getTreeString() {
+		StringBuilder sb = new StringBuilder();
+		buildTreeString(root, 0, sb);
+		return sb.toString();
+	}
+
+	private void buildTreeString(RedBlackTreeNode node, int depth, StringBuilder sb) {
+		if (node != null) {
+			buildTreeString(node.right, depth + 1, sb);
+			sb.append("  ".repeat(depth)).append(node.toString()).append("\n");
+			buildTreeString(node.left, depth + 1, sb);
+		}
+	}
+
+	public void printInOrder() {
+		System.out.println("RB-Tree in-order:");
+		printInOrder(root, 0);
+	}
+
+	private void printInOrder(RedBlackTreeNode node, int depth) {
+		if (node != null) {
+			printInOrder(node.right, depth + 1);
+			System.out.printf("%s%s%n", "  ".repeat(depth), node.toString());
+			printInOrder(node.left, depth + 1);
+		}
+	}
+
+	// 🔧 Для тестов
+	public static void main(String[] args) {
+		RedBlackTree tree = new RedBlackTree();
+		tree.insert(10);
+		tree.insert(7);
+		tree.insert(3);
+		tree.insert(11);
+		tree.printInOrder();
+	}
+}
+					
+</code></pre>
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Входные данные</h2>
+            <div class="input-group">
+                <label>Вариант 1: Загрузить из файла</label>
+                <input type="file" id="input-file" accept=".txt">
+            </div>
+            <div class="input-group">
+                <label>Вариант 2: Ввести вручную</label><br>
+                <input type="text" id="text-input" placeholder="Текст для поиска"><br>
+                <input type="text" id="pattern-input" placeholder="Шаблон для поиска">
+            </div>
+            <button id="run" class="sortButton">Выполнить поиск</button>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Консоль вывода</h2>
+            <div class="code-container" style="background-color: #111827;">
+                <pre id="output-console" style="color: #10b981; font-family: monospace;">[Результат выполнения появится здесь]</pre>
+            </div>
+        </section>
+
+        <footer class="footer-meta">
+            <span class="deadline">Выполнил Митичкин К.А</span>
+            <span class="status">Статус: Ожидает подтверждения</span>
+        </footer>
+    </div>
+</body>
+<script src="../scripts/lab4/server4.js"></script>
+</html>

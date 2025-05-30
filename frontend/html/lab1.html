@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №1</title>
+    <link rel="stylesheet" href="../styles/lab0/lab0.css">
+	<link rel="stylesheet" href="../styles/lab1.css">
+  <link rel="stylesheet" href="../styles/IndexStyle/header.css">
+    <!-- Prism.js для подсветки синтаксиса -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+</head>
+<body>
+  <header class="header_site">
+    <!-- Навигационное меню -->
+    <div class="logo">ITMO</div>
+    <nav class="navBar">
+      <ul class="listNavBar">
+        <li class="item1 itemListNavbar">
+          <a href="../Home.html">Главная</a> 
+        </li>
+         <li class="item2 itemListNavbar">
+          <a href="../index.html">Задания</a> 
+        </li>
+        <li class="item3 itemListNavbar">
+          <a href="../WebSite.html">О сайте</a> 
+        </li>
+      </ul>
+    </nav>
+  </header>
+    <div class="lab-container">
+        <header class="lab-header">
+            <div class="lab-number">Лабораторная работа №1</div>
+            <h1 class="lab-title" contenteditable="true">
+        Алгоритм решения пирамидальной сортировки»
+      </h1>
+        </header>
+
+    <section class="lab-section">
+            <h2 class="section-title">Задание</h2>
+            <div class="lab-description" contenteditable="true">
+        Разработать программу пирамидальной сортировки на языке Java, 
+        записывая числа из файла в статестический или 
+        динамический массив по выбору пользователя
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Краткий обзор</h2>
+            <div class="lab-description" contenteditable="true">
+                Программа предназначена для реализации и демонстрации работы 
+        алгоритма пирамидальной сортировки (HeapSort) с возможностью 
+        выбора типа исходного массива: статического (заранее заданного 
+        в коде) или динамического (загружаемого пользователем из текстового 
+        файла). Программа состоит из клиентской и серверной частей. Клиентская 
+        часть, разработанная с использованием HTML и JavaScript, обеспечивает 
+        пользовательский интерфейс для ввода исходных данных, выбора 
+        режима сортировки, отправки данных на сервер и отображения 
+        результатов. Серверная часть, реализованная на языке Java, 
+        принимает JSON-запрос, содержащий массив чисел, выполняет 
+        сортировку с использованием алгоритма HeapSort, измеряет 
+        время выполнения, формирует ответ в формате JSON и отправляет 
+        его обратно клиенту. Результатом работы программы является 
+        отображение исходного и отсортированного массивов, количества 
+        элементов и затраченного времени на сортировку. Программа демонстрирует 
+        принципы клиент-серверного взаимодействия, работу с файлами, передачу 
+        данных по HTTP и реализацию одного из базовых алгоритмов сортировки.
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Реализация (Java)</h2>
+            <div class="code-container">
+                <pre class="line-numbers"><code class="language-java" id="js-code">//Листинг программы Java-класса HeapSortService.
+import java.util.Arrays;
+
+public class HeapSortService {
+
+Кирилл Митичкин, [10.05.2025 0:48]
+// Основная функция для сортировки
+    public static SortResult sort(int[] numbers, boolean isStatic) {
+        // Клонирование массива, в зависимости от типа
+        int[] original = isStatic ? Arrays.copyOf(numbers, numbers.length) : numbers.clone();
+        int[] sorted = Arrays.copyOf(original, original.length);
+
+        // Засекаем время начала сортировки
+        long startTime = System.nanoTime();
+
+        // Вставляем нашу пирамидальную сортировку
+        heapSort(sorted);
+
+        // Засекаем время окончания сортировки
+        long endTime = System.nanoTime();
+
+        // Возвращаем результат
+        return new SortResult(original, sorted, (endTime - startTime) / 1_000_000);
+    }
+
+    // Пирамидальная сортировка
+    private static void heapSort(int[] arr) {
+        int n = arr.length;
+
+        // Построение кучи (перегруппировка массива)
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(arr, n, i);
+        }
+
+        // Один за другим извлекаем элементы из кучи
+        for (int i = n - 1; i >= 0; i--) {
+            // Перемещаем корень (максимальный элемент) в конец массива
+            swap(arr, 0, i);
+
+            // Вызываем heapify на уменьшенной куче
+            heapify(arr, i, 0);
+        }
+    }
+
+    // Процедура преобразования в двоичную кучу для поддерева с корневым узлом i
+    private static void heapify(int[] arr, int n, int i) {
+        int largest = i; // Инициализируем наибольший элемент как корень
+        int l = 2 * i + 1; // Левый узел
+        int r = 2 * i + 2; // Правый узел
+
+        // Если левый дочерний элемент больше корня
+        if (l < n && arr[l] > arr[largest]) {
+            largest = l;
+        }
+
+        // Если правый дочерний элемент больше, чем самый большой элемент на данный
+        // момент
+        if (r < n && arr[r] > arr[largest]) {
+            largest = r;
+        }
+
+        // Если самый большой элемент не корень
+        if (largest != i) {
+            swap(arr, i, largest);
+
+            // Рекурсивно преобразуем в двоичную кучу затронутое поддерево
+            heapify(arr, n, largest);
+        }
+    }
+
+    // Вспомогательная функция для обмена элементов массива
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+                </code></pre>
+            </div>
+        </section>
+
+		<!-- Раздел с интерфейсом -->
+		<section class="lab-section">
+			<h2 class="section-title">Входные данные и настройки</h2>
+			<div class="lab-description">
+				<p>Выберите способ получения массива:</p>
+				<label><input type="radio" name="mode" value="static" checked> Статический массив (по умолчанию)</label><br>
+				<label><input type="radio" name="mode" value="file"> Загрузка из файла (.txt с числами через пробел или перевод строки)</label>
+				<div id="file-input" style="margin-top:10px; display:none;">
+				<input type="file" id="input-file" accept=".txt">
+				</div>
+				<button id="run" style="margin-top:15px;">Отсортировать</button>
+			</div>
+		</section>
+
+		<!-- Раздел вывода -->
+        <section class="lab-section">
+            <h2 class="section-title">Консоль вывода</h2>
+            <div class="code-container" style="background-color: #111827;">
+                <pre id="output-console" style="color: #10b981; font-family: monospace;">[Результат выполнения появится здесь]</pre>
+            </div>
+        </section>
+
+        <footer class="footer-meta">
+            <span class="deadline">Выполнил Митичкин К.А</span>
+            <span class="status">Статус: Сдано</span>
+        </footer>
+    </div>
+</body>
+  <script src="../scripts/lab1/server1.js"></script>
+</html>

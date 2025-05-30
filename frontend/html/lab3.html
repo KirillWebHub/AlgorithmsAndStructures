@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №3</title>
+    <link rel="stylesheet" href="../styles/lab0/lab0.css">
+	<link rel="stylesheet" href="../styles/IndexStyle/header.css">
+    <!-- Prism.js для подсветки синтаксиса -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+</head>
+<body>
+	<header class="header_site">
+		<!-- Навигационное меню -->
+		<div class="logo">ITMO</div>
+		<nav class="navBar">
+			<ul class="listNavBar">
+				<li class="item1 itemListNavbar">
+					<a href="../Home.html">Главная</a> 
+				</li>
+				<li class="item2 itemListNavbar">
+					<a href="../index.html">Задания</a> 
+				</li>
+				<li class="item3 itemListNavbar">
+					<a href="../WebSite.html">О сайте</a> 
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+    <div class="lab-container">
+        <header class="lab-header">
+            <div class="lab-number">Лабораторная работа №3</div>
+            <h1 class="lab-title" contenteditable="true">
+				Алгоритм решения пирамидальной сортировки»
+			</h1>
+        </header>
+
+		<section class="lab-section">
+            <h2 class="section-title">Задание</h2>
+            <div class="lab-description" contenteditable="true">
+				Разработать программу пирамидальной сортировки на языке Java, 
+				записывая числа из файла, разработать Поиск по схеме Бойера-Мура и оценить сложность алгоритма!
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Краткий обзор</h2>
+            <div class="lab-description" contenteditable="true">
+			Программа реализует алгоритм пирамидальной сортировки (HeapSort) с подробным анализом 
+			всех ключевых операций, выполняемых в процессе сортировки. Цель программы — не только 
+			отсортировать массив чисел, но и провести оценку вычислительной сложности алгоритма на 
+			практике. Для этого производится подсчёт следующих операций: <br>
+			•	сравнений элементов;<br>
+			•	обменов (перестановок);<br>
+			•	арифметических операций (сложение, вычитание, умножение, деление);<br>
+			•	операций чтения и записи;<br>
+			•	присваиваний;<br>
+			•	итераций циклов;<br>
+			•	вызовов вспомогательной функции heapify;<br>
+			•	выделения памяти.<br>
+			Собранная информация позволяет построить эмпирические графики зависимости количества 
+			операций и времени выполнения от размера входных данных, а также подтвердить теоретическую 
+			сложность алгоритма — O(n log n).
+	
+            </div>
+        </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Реализация BoyerMoore.java</h2>
+            <div class="code-container">
+                <pre class="line-numbers"><code class="language-java" id="js-code">// Схема Бойера-Мура
+package backend.algorithms;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class BoyerMoore {
+	public static int[] search(int[] text, int[] pattern) {
+		List<Integer> matches = new ArrayList<>();
+		if (pattern.length == 0 || text.length < pattern.length) {
+			return new int[0];
+		}
+
+		int[] badChar = makeBadCharTable(pattern);
+		int[] goodSuffix = makeGoodSuffixTable(pattern);
+
+		int i = 0;
+		int n = text.length;
+		int m = pattern.length;
+		while (i <= n - m) {
+			int j = m - 1;
+			while (j >= 0 && pattern[j] == text[i + j]) {
+				j--;
+			}
+			if (j < 0) {
+				matches.add(i);
+				i += goodSuffix[0]; 
+			} else {
+				int bcShift = j - badChar[text[i + j]];
+				int gsShift = goodSuffix[j];
+				i += Math.max(1, Math.max(bcShift, gsShift));
+			}
+		}
+
+		return matches.stream().mapToInt(Integer::intValue).toArray();
+	}
+
+	private static int[] makeBadCharTable(int[] pattern) {
+		int[] table = new int[256];
+		Arrays.fill(table, -1);
+		for (int i = 0; i < pattern.length; i++) {
+			int c = pattern[i];
+			if (c >= 0 && c < 256) {
+				table[c] = i;
+			}
+		}
+		return table;
+	}
+
+	private static int[] makeGoodSuffixTable(int[] pattern) {
+		int m = pattern.length;
+		int[] f = new int[m + 1];
+		int[] s = new int[m + 1];
+
+		f[m] = m + 1;
+		int j = m + 1;
+		for (int i = m; i > 0; i--) {
+			while (j <= m && pattern[i - 1] != pattern[j - 1]) {
+				if (s[j] == 0) {
+					s[j] = j - i;
+				}
+				j = f[j];
+			}
+			i--;
+			j--;
+			f[i] = j;
+		}
+
+		j = f[0];
+		for (int k = 0; k <= m; k++) {
+			if (s[k] == 0) {
+				s[k] = j;
+			}
+			if (k == j) {
+				j = f[j];
+			}
+		}
+
+		int[] table = new int[m];
+		for (int k = 0; k < m; k++) {
+			table[k] = s[k + 1];
+		}
+		return table;
+	}
+
+	public static void main(String[] args) {
+		int[] text = { 1, 2, 3, 1, 2, 3 };
+		int[] pattern = { 1, 2, 3 };
+		System.out.println(Arrays.toString(search(text, pattern)));
+	}
+}
+                </code></pre>
+            </div>
+        </section>
+
+		<section class="lab-section">
+			<h2 class="section-title">Входные данные</h2>
+
+			<div class="input-group">
+				<label>Вариант 1: Загрузить из файла</label>
+				<input type="file" id="input-file" accept=".txt">
+			</div>
+			
+			<div class="input-group">
+				<label>Вариант 2: Ввести вручную</label>
+				<input type="text" id="array-input" placeholder="Массив (через пробел): 1 2 3 4 5">
+				<input type="text" id="pattern-input" placeholder="Шаблон (через пробел): 2 3">
+			</div>
+			
+			<button id="run" class="sortButton">Выполнить поиск</button>
+		  </section>
+
+        <section class="lab-section">
+            <h2 class="section-title">Консоль вывода</h2>
+            <div class="code-container" style="background-color: #111827;">
+                <pre id="output-console" style="color: #10b981; font-family: monospace;">[Результат выполнения появится здесь]</pre>
+            </div>
+        </section>
+
+        <footer class="footer-meta">
+            <span class="deadline">Выполнил Митичкин К.А</span>
+            <span class="status">Статус: Сдано</span>
+        </footer>
+    </div>
+</body>
+	<script src="../scripts/lab3/server3.js"></script>
+</html>
