@@ -1,0 +1,41 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  margin-bottom: 1.8em;
+}
+
+/* Текстовые поля */
+.input-group input[type="text"] {
+  padding: 0.6em 1em;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.input-group input[type="text"]:focus {
+  outline: none;
+  border-color: #4b5563;
+  box-shadow: 0 0 0 2px rgba(75, 85, 99, 0.3);
+}
+
+/* Кастомная кнопка выбора файла */
+.input-group input[type="file"]::file-selector-button {
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: 6px;
+  background-color: #1f2937;
+  color: #ffffff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-group input[type="file"]::file-selector-button:hover {
+  background-color: #374151;
+}
+
+
+

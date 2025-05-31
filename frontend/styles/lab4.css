@@ -1,0 +1,53 @@
+.input-group {
+  margin-bottom: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+
+.styled-input {
+  padding: 0.6em 1em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  transition: border 0.3s ease;
+}
+
+.styled-input:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+.file-label {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.file-label input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+
+.file-custom {
+  display: inline-block;
+  background-color: #1f2937;
+  color: #ffffff;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-custom:hover {
+  background-color: #374151;
+}

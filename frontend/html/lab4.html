@@ -6,6 +6,7 @@
     <title>Лабораторная работа №4</title>
     <link rel="stylesheet" href="../styles/lab0/lab0.css">
     <link rel="stylesheet" href="../styles/IndexStyle/header.css">
+	<link rel="stylesheet" href="../styles/lab4.css">
     <!-- Prism.js для подсветки синтаксиса -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
@@ -278,19 +279,28 @@ public class RedBlackTree {
             </div>
         </section>
 
-        <section class="lab-section">
-            <h2 class="section-title">Входные данные</h2>
-            <div class="input-group">
-                <label>Вариант 1: Загрузить из файла</label>
-                <input type="file" id="input-file" accept=".txt">
-            </div>
-            <div class="input-group">
-                <label>Вариант 2: Ввести вручную</label><br>
-                <input type="text" id="text-input" placeholder="Текст для поиска"><br>
-                <input type="text" id="pattern-input" placeholder="Шаблон для поиска">
-            </div>
-            <button id="run" class="sortButton">Выполнить поиск</button>
-        </section>
+       <section class="lab-section">
+  <h2 class="section-title">Входные данные</h2>
+
+  <div class="lab-description">
+    <div class="input-group">
+      <label for="input-file">Вариант 1: Загрузить из файла</label>
+      <label class="file-label">
+        <input type="file" id="input-file" accept=".txt" />
+        <span class="file-custom">📁 Выберите файл</span>
+      </label>
+    </div>
+
+		<div class="input-group">
+			<label for="text-input">Вариант 2: Ввести вручную</label>
+			<input type="text" id="text-input" class="styled-input" placeholder="Текст для поиска" />
+			<input type="text" id="pattern-input" class="styled-input" placeholder="Шаблон для поиска" />
+		</div>
+
+			<button id="run" class="sortButton">Выполнить поиск</button>
+		</div>
+		</section>
+
 
         <section class="lab-section">
             <h2 class="section-title">Консоль вывода</h2>
