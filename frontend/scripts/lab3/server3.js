@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         outputConsole.textContent = 'Выполняю поиск...';
         
         try {
-            const response = await fetch('/api/boyer-moore', {
+            const response = await fetch('http://localhost:8080/api/boyer-moore', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)

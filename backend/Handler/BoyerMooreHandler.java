@@ -18,6 +18,14 @@ public class BoyerMooreHandler implements HttpHandler {
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
+		if ("OPTIONS".equalsIgnoreCase(exchange.getRequestMethod())) {
+			var headers = exchange.getResponseHeaders();
+			headers.set("Access-Control-Allow-Origin", "*");
+			headers.set("Access-Control-Allow-Headers", "Content-Type");
+			headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+			exchange.sendResponseHeaders(204, -1);
+			return;
+    	}
 		if (!"POST".equalsIgnoreCase(exchange.getRequestMethod())) {
 			sendJson(exchange, 405, "{\"error\":\"Метод не поддерживается\"}");
 			return;
@@ -59,7 +67,10 @@ public class BoyerMooreHandler implements HttpHandler {
 	}
 
 	private void sendJson(HttpExchange exchange, int code, String response) throws IOException {
+		var headers = exchange.getResponseHeaders();
 		exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
+		headers.set("Access-Control-Allow-Origin", "*");
+
 		byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
 		exchange.sendResponseHeaders(code, bytes.length);
 		try (OutputStream os = exchange.getResponseBody()) {
